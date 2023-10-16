@@ -2,7 +2,7 @@ const pool = require('../db');
 
 const listarAlunos = async (req, res) => {
     try {
-        const { rows } = await pool.query('SELECT * FROM aluno');
+        const { rows } = await pool.query('SELECT * FROM aluno ORDER BY nome ASC');
         return res.status(200).json(rows);
     } catch (error) {
         return res.status(400).json({ error: 'Erro ao listar alunos' });

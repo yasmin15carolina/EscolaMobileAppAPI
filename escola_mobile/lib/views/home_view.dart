@@ -22,7 +22,6 @@ class _HomeViewState extends State<HomeView> {
         data: NavigationBarThemeData(),
         child: NavigationBar(
           height: MediaQuery.of(context).size.height * 0.1,
-          // backgroundColor: Colors.red,
           selectedIndex: index,
           onDestinationSelected: (index) async {
             setState(() {
