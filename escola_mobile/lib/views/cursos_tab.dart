@@ -1,6 +1,7 @@
 import 'package:escola_mobile/models/curso_model.dart';
 import 'package:escola_mobile/store/cursos_store.dart';
 import 'package:escola_mobile/views/curso_view.dart';
+import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:escola_mobile/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -24,9 +25,7 @@ class _CursosTabState extends State<CursosTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-      ),
+      appBar: EscolaAppBar(),
       body: Container(
         child: body(),
       ),
@@ -86,7 +85,12 @@ class _CursosTabState extends State<CursosTab> {
                 children: [
                   Text("Curso: ${curso.descricao}",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text("Ementa: ${curso.ementa}"),
+                  Text(
+                    "Ementa: ${curso.ementa}",
+                    overflow: curso.ementa.length > 60
+                        ? TextOverflow.ellipsis
+                        : TextOverflow.visible,
+                  ),
                 ],
               ),
             ),

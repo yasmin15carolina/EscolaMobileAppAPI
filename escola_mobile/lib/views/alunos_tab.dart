@@ -1,5 +1,6 @@
 import 'package:escola_mobile/models/aluno_model.dart';
 import 'package:escola_mobile/store/alunos_store.dart';
+import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,9 +25,7 @@ class _AlunosTabState extends State<AlunosTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-      ),
+      appBar: EscolaAppBar(),
       body: Container(
         // color: Colors.purple,
         child: body(),
