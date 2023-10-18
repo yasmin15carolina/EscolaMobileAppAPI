@@ -11,6 +11,7 @@ const cadastrarMatricula = async (req, res) => {
 };
 
 const listarMatriculas = async (req, res) => {
+    
     try {
         const matriculas = await pool.query(`
             SELECT ca.*, a.nome AS nome_aluno, c.descricao AS nome_curso
@@ -23,6 +24,23 @@ const listarMatriculas = async (req, res) => {
         return res.status(400).json({ error: 'Erro ao listar matrículas' });
     }
 };
+
+const listarMatriculasCurso = async (req, res) => {
+    const { codigo_curso } = req.query;
+    try {
+        const matriculas = await pool.query(`
+            SELECT ca.*, a.nome AS nome_aluno, c.descricao AS nome_curso
+            FROM curso_aluno ca
+            JOIN aluno a ON ca.codigo_aluno = a.codigo
+            JOIN curso c ON ca.codigo_curso = c.codigo
+            WHERE ca.codigo_curso = $1`, [codigo_curso]
+        );
+        return res.status(200).json(matriculas.rows);
+    } catch (error) {
+        return res.status(400).json({ error: 'Erro ao listar matrículas' });
+    }
+};
+
 
 const removerMatricula = async (req, res) => {
     const codigo = parseInt(req.params.codigo);
@@ -42,4 +60,5 @@ module.exports = {
     cadastrarMatricula,
     listarMatriculas,
     removerMatricula,
+    listarMatriculasCurso
 };

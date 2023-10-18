@@ -154,4 +154,13 @@ class EscolaDialogs {
       onConfirm,
     );
   }
+
+  static deletarMatricula(context, onConfirm) {
+    showCustomDialog(
+      context,
+      'Remover Matricula',
+      Text("Deseja remover essa matricula permanentemente?"),
+      onConfirm,
+    );
+  }
 }

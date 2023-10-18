@@ -1,5 +1,6 @@
 import 'package:escola_mobile/views/alunos_tab.dart';
 import 'package:escola_mobile/views/cursos_tab.dart';
+import 'package:escola_mobile/views/matriculas_view.dart';
 import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class _HomeViewState extends State<HomeView> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AlunosTab(),
+                    builder: (context) => MatriculasView(),
                   ));
             }),
           ],

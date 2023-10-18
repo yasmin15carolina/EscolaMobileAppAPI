@@ -5,6 +5,7 @@ import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:escola_mobile/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CursoView extends StatefulWidget {
   final CursoModel curso;
@@ -18,7 +19,7 @@ class _CursoViewState extends State<CursoView> {
   MatriculaStore matriculaStore = MatriculaStore();
   @override
   void initState() {
-    matriculaStore.listarMatriculas();
+    matriculaStore.listarMatriculasdoCurso(widget.curso.codigo!);
     super.initState();
   }
 
@@ -31,10 +32,17 @@ class _CursoViewState extends State<CursoView> {
   }
 
   body() {
-    return Column(
+    return ListView(
       children: [
-        Text(widget.curso.descricao),
+        SizedBox(height: 25),
+        Text(
+          widget.curso.descricao,
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 5),
         Text(widget.curso.ementa),
+        SizedBox(height: 25),
+        SizedBox(height: 15),
         AspectRatio(aspectRatio: 2, child: buildAlunos())
       ],
     );
@@ -42,7 +50,6 @@ class _CursoViewState extends State<CursoView> {
 
   Widget buildAlunos() {
     return Container(
-      color: Colors.orange,
       child: Observer(
         builder: (context) {
           if (matriculaStore.matriculas == null) {
@@ -51,7 +58,7 @@ class _CursoViewState extends State<CursoView> {
           return ListView.separated(
             itemCount: matriculaStore.matriculas!.length,
             separatorBuilder: (context, index) =>
-                Divider(), // Add a Divider between items
+                Divider(height: 1), // Add a Divider between items
             itemBuilder: (context, index) {
               final element = matriculaStore.matriculas![index];
               return buildAluno(matriculaStore.matriculas![index]);
@@ -64,7 +71,9 @@ class _CursoViewState extends State<CursoView> {
 
   Widget buildAluno(MatriculaModel matricula) {
     return Container(
-      margin: EdgeInsets.all(15),
+      color: const Color.fromARGB(255, 212, 212, 212),
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       child: Row(
         // crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,19 +89,18 @@ class _CursoViewState extends State<CursoView> {
             child: IconButton(
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  // EscolaDialogs.deletarAluno(context, () async {
-                  //   await matriculaStore.deletarAluno(aluno.codigo!);
-                  //   await matriculaStore.listarAlunos();
-                  //   Fluttertoast.showToast(
-                  //     msg: 'Aluno Deletado!',
-                  //     toastLength: Toast.LENGTH_SHORT,
-                  //     gravity: ToastGravity.BOTTOM,
-                  //     timeInSecForIosWeb: 1,
-                  //     backgroundColor: Colors.black,
-                  //     textColor: Colors.white,
-                  //     fontSize: 16.0,
-                  //   );
-                  // });
+                  EscolaDialogs.deletarMatricula(context, () async {
+                    await matriculaStore.deletarMatricula(matricula.codigo!);
+                    Fluttertoast.showToast(
+                      msg: 'Aluno Deletado!',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                      fontSize: 16.0,
+                    );
+                  });
                 }),
           ),
         ],

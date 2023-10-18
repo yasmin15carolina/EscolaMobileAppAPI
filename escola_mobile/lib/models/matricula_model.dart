@@ -10,16 +10,16 @@ class MatriculaModel {
   @JsonKey(name: 'codigo_aluno')
   int? codigoAluno;
   @JsonKey(name: 'nome_aluno')
-  String nome;
+  String? nome;
   @JsonKey(name: 'nome_curso')
-  String curso;
+  String? curso;
 
   MatriculaModel({
     this.codigo,
     this.codigoCurso,
     this.codigoAluno,
-    required this.nome,
-    required this.curso,
+    this.nome,
+    this.curso,
   });
 
   factory MatriculaModel.fromJson(Map<String, dynamic> json) =>

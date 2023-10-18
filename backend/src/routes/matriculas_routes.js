@@ -8,6 +8,9 @@ router.post('/cadastrar', matriculasController.cadastrarMatricula);
 // Rota para listar matrículas (GET)
 router.get('/', matriculasController.listarMatriculas);
 
+// Rota para listar matrículas (GET)
+router.get('/Curso', matriculasController.listarMatriculasCurso);
+
 // Rota para remover matrícula (DELETE)
 router.delete('/remover/:codigo', matriculasController.removerMatricula);
 

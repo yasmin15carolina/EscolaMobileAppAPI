@@ -47,7 +47,7 @@ class _AlunosTabState extends State<AlunosTab> {
     return Observer(
       builder: (context) {
         if (alunosStore.alunos == null) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
         return ListView.separated(
           itemCount: alunosStore.alunos!.length,

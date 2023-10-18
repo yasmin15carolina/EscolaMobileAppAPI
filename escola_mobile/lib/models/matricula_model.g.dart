@@ -11,8 +11,8 @@ MatriculaModel _$MatriculaModelFromJson(Map<String, dynamic> json) =>
       codigo: json['codigo'] as int?,
       codigoCurso: json['codigo_curso'] as int?,
       codigoAluno: json['codigo_aluno'] as int?,
-      nome: json['nome_aluno'] as String,
-      curso: json['nome_curso'] as String,
+      nome: json['nome_aluno'] as String?,
+      curso: json['nome_curso'] as String?,
     );
 
 Map<String, dynamic> _$MatriculaModelToJson(MatriculaModel instance) =>

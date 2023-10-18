@@ -15,6 +15,19 @@ class MatriculaService {
     return res;
   }
 
+  static Future<Response> listarCurso(int codigo) async {
+    final res = await dio.get(
+      "$urlAPI/Matricula/Curso",
+      queryParameters: {"codigo_curso": codigo},
+      options: Options(
+        validateStatus: (status) {
+          return status! < 500;
+        },
+      ),
+    );
+    return res;
+  }
+
   static Future<Response> cadastrar(MatriculaModel matricula) async {
     return dio.post(
       "$urlAPI/Matricula/cadastrar",
