@@ -41,8 +41,8 @@ class _CursoViewState extends State<CursoView> {
           Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        CadastrarMatricula(codigoCurso: widget.curso.codigo),
+                    builder: (context) => CadastrarMatriculaView(
+                        codigoCurso: widget.curso.codigo),
                   ))
               .then((value) =>
                   matriculaStore.listarMatriculasdoCurso(widget.curso.codigo!));

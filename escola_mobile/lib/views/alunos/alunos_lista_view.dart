@@ -31,6 +31,7 @@ class _AlunosListaViewState extends State<AlunosListaView> {
         child: body(),
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('CadastraAlunoButton'),
         backgroundColor: Colors.orange[700],
         child: const Icon(
           Icons.add,

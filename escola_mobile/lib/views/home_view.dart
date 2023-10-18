@@ -19,6 +19,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key('HomeView'),
       backgroundColor: const Color.fromARGB(255, 212, 212, 212),
       appBar: EscolaAppBar(),
       body: Container(
@@ -70,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CadastrarMatricula(),
+                builder: (context) => CadastrarMatriculaView(),
               ));
         },
         child: Icon(

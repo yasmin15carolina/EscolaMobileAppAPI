@@ -41,7 +41,7 @@ class _MatriculasViewState extends State<MatriculasView> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CadastrarMatricula(),
+                builder: (context) => CadastrarMatriculaView(),
               )).then((value) => matriculasStore.listarMatriculas());
         },
       ),

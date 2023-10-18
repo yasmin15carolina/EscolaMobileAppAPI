@@ -42,6 +42,7 @@ class EscolaDialogs {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TextFormField(
+            key: const Key('NovoAlunoInput'),
             controller: nomeController,
             decoration: InputDecoration(labelText: 'Nome do aluno'),
           ),

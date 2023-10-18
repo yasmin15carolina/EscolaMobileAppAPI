@@ -10,15 +10,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../models/aluno_model.dart';
 
-class CadastrarMatricula extends StatefulWidget {
+class CadastrarMatriculaView extends StatefulWidget {
   final int? codigoCurso;
-  const CadastrarMatricula({super.key, this.codigoCurso});
+  const CadastrarMatriculaView({super.key, this.codigoCurso});
 
   @override
-  State<CadastrarMatricula> createState() => _CadastrarMatriculaState();
+  State<CadastrarMatriculaView> createState() => _CadastrarMatriculaViewState();
 }
 
-class _CadastrarMatriculaState extends State<CadastrarMatricula> {
+class _CadastrarMatriculaViewState extends State<CadastrarMatriculaView> {
   AlunosStore alunosStore = AlunosStore();
   CursosStore cursosStore = CursosStore();
   MatriculaStore matriculaStore = MatriculaStore();
@@ -34,6 +34,7 @@ class _CadastrarMatriculaState extends State<CadastrarMatricula> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key('CadastrarMatriculaView'),
       appBar: EscolaAppBar(),
       body: Observer(builder: (context) {
         if (alunosStore.alunos == null) {
