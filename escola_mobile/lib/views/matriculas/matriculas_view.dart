@@ -1,15 +1,11 @@
-import 'package:escola_mobile/models/curso_model.dart';
 import 'package:escola_mobile/models/matricula_model.dart';
-import 'package:escola_mobile/store/cursos_store.dart';
-import 'package:escola_mobile/views/cadastrar_matricula_view.dart';
-import 'package:escola_mobile/views/curso_view.dart';
+import 'package:escola_mobile/views/matriculas/cadastrar_matricula_view.dart';
 import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:escola_mobile/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-import '../store/matricula_store.dart';
+import '../../store/matricula_store.dart';
 
 class MatriculasView extends StatefulWidget {
   const MatriculasView({super.key});
@@ -35,7 +31,12 @@ class _MatriculasViewState extends State<MatriculasView> {
         child: body(),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.orange[700],
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
         onPressed: () {
           Navigator.push(
               context,
@@ -58,7 +59,6 @@ class _MatriculasViewState extends State<MatriculasView> {
           separatorBuilder: (context, index) =>
               Divider(), // Add a Divider between items
           itemBuilder: (context, index) {
-            final element = matriculasStore.matriculas![index];
             return buildMatricula(matriculasStore.matriculas![index]);
           },
         );
@@ -67,45 +67,36 @@ class _MatriculasViewState extends State<MatriculasView> {
   }
 
   Widget buildMatricula(MatriculaModel matricula) {
-    return InkWell(
-      onTap: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => CursoView(curso: matricula),
-        //     ));
-      },
-      child: Container(
-        margin: EdgeInsets.all(15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 4,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Curso: ${matricula.curso}",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(
-                    "Aluno: ${matricula.nome}",
-                  ),
-                ],
-              ),
+    return Container(
+      margin: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Curso: ${matricula.curso}",
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  "Aluno: ${matricula.nome}",
+                ),
+              ],
             ),
-            Expanded(
-              flex: 1,
-              child: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    EscolaDialogs.deletarMatricula(context, () async {
-                      await matriculasStore.deletarMatricula(matricula.codigo!);
-                      await matriculasStore.listarMatriculas();
-                    });
-                  }),
-            ),
-          ],
-        ),
+          ),
+          Expanded(
+            flex: 1,
+            child: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  EscolaDialogs.deletarMatricula(context, () async {
+                    await matriculasStore.deletarMatricula(matricula.codigo!);
+                    await matriculasStore.listarMatriculas();
+                  });
+                }),
+          ),
+        ],
       ),
     );
   }

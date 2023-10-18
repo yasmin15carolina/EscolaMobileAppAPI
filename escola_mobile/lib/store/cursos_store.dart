@@ -29,7 +29,7 @@ abstract class _CursosStoreBase with Store {
         }
         cursos!.asObservable();
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -40,10 +40,11 @@ abstract class _CursosStoreBase with Store {
   Future cadastrarCurso() async {
     try {
       final res = await CursoService.cadastrarCurso(curso!);
-      if (res.statusCode == 200) {
+      if (res.statusCode == 201) {
+        if (cursos != null) cursos!.add(CursoModel.fromJson(res.data));
         print(res.data);
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -57,7 +58,7 @@ abstract class _CursosStoreBase with Store {
       if (res.statusCode == 200) {
         print(res.data);
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";

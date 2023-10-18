@@ -1,20 +1,19 @@
 import 'package:escola_mobile/models/curso_model.dart';
 import 'package:escola_mobile/store/cursos_store.dart';
-import 'package:escola_mobile/views/curso_view.dart';
+import 'package:escola_mobile/views/cursos/curso_view.dart';
 import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:escola_mobile/widgets/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-class CursosTab extends StatefulWidget {
-  const CursosTab({super.key});
+class CursosListaView extends StatefulWidget {
+  const CursosListaView({super.key});
 
   @override
-  State<CursosTab> createState() => _CursosTabState();
+  State<CursosListaView> createState() => _CursosListaViewState();
 }
 
-class _CursosTabState extends State<CursosTab> {
+class _CursosListaViewState extends State<CursosListaView> {
   CursosStore cursosStore = CursosStore();
   @override
   void initState() {
@@ -30,7 +29,12 @@ class _CursosTabState extends State<CursosTab> {
         child: body(),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.orange[700],
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
         onPressed: () {
           EscolaDialogs.cadastrarCurso(context,
               (String descricao, String ementa) async {
@@ -48,14 +52,12 @@ class _CursosTabState extends State<CursosTab> {
     return Observer(
       builder: (context) {
         if (cursosStore.cursos == null) {
-          return CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
         return ListView.separated(
           itemCount: cursosStore.cursos!.length,
-          separatorBuilder: (context, index) =>
-              Divider(), // Add a Divider between items
+          separatorBuilder: (context, index) => Divider(),
           itemBuilder: (context, index) {
-            final element = cursosStore.cursos![index];
             return buildAluno(cursosStore.cursos![index]);
           },
         );
@@ -84,7 +86,7 @@ class _CursosTabState extends State<CursosTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Curso: ${curso.descricao}",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text(
                     "Ementa: ${curso.ementa}",
                     overflow: curso.ementa.length > 60
@@ -113,7 +115,7 @@ class _CursosTabState extends State<CursosTab> {
             Expanded(
               flex: 1,
               child: IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     EscolaDialogs.deletarCurso(context, () async {
                       await cursosStore.deletarCurso(curso.codigo!);

@@ -27,7 +27,7 @@ abstract class _AlunosStoreBase with Store {
         }
         alunos!.asObservable();
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -41,7 +41,7 @@ abstract class _AlunosStoreBase with Store {
       if (res.statusCode == 201) {
         print(res.data);
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -55,7 +55,7 @@ abstract class _AlunosStoreBase with Store {
       if (res.statusCode == 200) {
         print(res.data);
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -69,7 +69,7 @@ abstract class _AlunosStoreBase with Store {
       if (res.statusCode == 200) {
         print(res.data);
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";

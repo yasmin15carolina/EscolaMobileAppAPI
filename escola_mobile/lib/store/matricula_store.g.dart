@@ -65,6 +65,16 @@ mixin _$MatriculaStore on _MatriculaStoreBase, Store {
     return _$listarMatriculasAsyncAction.run(() => super.listarMatriculas());
   }
 
+  late final _$listarMatriculasdoCursoAsyncAction = AsyncAction(
+      '_MatriculaStoreBase.listarMatriculasdoCurso',
+      context: context);
+
+  @override
+  Future<dynamic> listarMatriculasdoCurso(int codigo) {
+    return _$listarMatriculasdoCursoAsyncAction
+        .run(() => super.listarMatriculasdoCurso(codigo));
+  }
+
   late final _$cadastrarMatriculaAsyncAction =
       AsyncAction('_MatriculaStoreBase.cadastrarMatricula', context: context);
 
@@ -78,7 +88,7 @@ mixin _$MatriculaStore on _MatriculaStoreBase, Store {
       AsyncAction('_MatriculaStoreBase.deletarMatricula', context: context);
 
   @override
-  Future<dynamic> deletarMatricula(int codigo) {
+  Future<bool> deletarMatricula(int codigo) {
     return _$deletarMatriculaAsyncAction
         .run(() => super.deletarMatricula(codigo));
   }

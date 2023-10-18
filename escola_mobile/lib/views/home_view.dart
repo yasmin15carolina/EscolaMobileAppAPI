@@ -1,8 +1,10 @@
-import 'package:escola_mobile/views/alunos_tab.dart';
-import 'package:escola_mobile/views/cursos_tab.dart';
-import 'package:escola_mobile/views/matriculas_view.dart';
+import 'package:escola_mobile/views/alunos/alunos_lista_view.dart';
+import 'package:escola_mobile/views/cursos/cursos_lista_view.dart';
+import 'package:escola_mobile/views/matriculas/matriculas_view.dart';
 import 'package:escola_mobile/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
+
+import 'matriculas/cadastrar_matricula_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,7 +15,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int index = 0;
-  List<Widget> tabs = [CursosTab(), AlunosTab()];
+  List<Widget> tabs = [CursosListaView(), AlunosListaView()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +29,14 @@ class _HomeViewState extends State<HomeView> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AlunosTab(),
+                    builder: (context) => AlunosListaView(),
                   ));
             }),
             buildCard("Cursos", Icons.menu_book_sharp, () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CursosTab(),
+                    builder: (context) => CursosListaView(),
                   ));
             }),
             buildCard("Matriculas", Icons.person, () {
@@ -47,27 +49,37 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      // bottomNavigationBar: NavigationBarTheme(
-      //   data: NavigationBarThemeData(),
-      //   child: NavigationBar(
-      //     height: MediaQuery.of(context).size.height * 0.1,
-      //     selectedIndex: index,
-      //     onDestinationSelected: (index) async {
-      //       setState(() {
-      //         this.index = index;
-      //       });
-      //     },
-      //     destinations: [
-      //       NavigationDestination(
-      //           icon: Icon(Icons.menu_book_sharp), label: "Cursos"),
-      //       NavigationDestination(
-      //           icon: Icon(
-      //             Icons.person,
-      //           ),
-      //           label: "Alunos"),
-      //     ],
-      //   ),
-      // ),
+      bottomNavigationBar: BottomAppBar(
+          elevation: 20,
+          height: 75,
+          shape: CircularNotchedRectangle(),
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text(
+              "Nova Matricula",
+              style: TextStyle(
+                  color: Colors.orange[700],
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
+          ))),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange[700],
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CadastrarMatricula(),
+              ));
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -91,13 +103,13 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Icon(
               icon,
-              color: Colors.orangeAccent,
+              color: Colors.orange[700],
               size: MediaQuery.of(context).size.width * 0.1,
             ),
             Text(
               text,
               style: TextStyle(
-                  color: Colors.orangeAccent,
+                  color: Colors.orange[700],
                   fontSize: MediaQuery.of(context).size.width * 0.08),
             ),
           ],

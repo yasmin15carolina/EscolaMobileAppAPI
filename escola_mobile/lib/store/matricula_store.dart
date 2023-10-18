@@ -27,7 +27,7 @@ abstract class _MatriculaStoreBase with Store {
         }
         matriculas!.asObservable();
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -46,7 +46,7 @@ abstract class _MatriculaStoreBase with Store {
         }
         matriculas!.asObservable();
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
@@ -61,7 +61,7 @@ abstract class _MatriculaStoreBase with Store {
         print(res.data);
         return true;
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
         return false;
       }
     } catch (e) {
@@ -71,14 +71,14 @@ abstract class _MatriculaStoreBase with Store {
   }
 
   @action
-  Future deletarMatricula(int codigo) async {
+  Future<bool> deletarMatricula(int codigo) async {
     try {
       final res = await MatriculaService.deletar(codigo);
       if (res.statusCode == 201) {
         print(res.data);
         return true;
       } else {
-        mensagemErro = res.data['mensagem'];
+        mensagemErro = res.data['error'];
         return false;
       }
     } catch (e) {

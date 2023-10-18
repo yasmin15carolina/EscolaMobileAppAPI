@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../widgets/dialogs.dart';
+import '../../widgets/dialogs.dart';
 
-class AlunosTab extends StatefulWidget {
-  const AlunosTab({super.key});
+class AlunosListaView extends StatefulWidget {
+  const AlunosListaView({super.key});
 
   @override
-  State<AlunosTab> createState() => _AlunosTabState();
+  State<AlunosListaView> createState() => _AlunosListaViewState();
 }
 
-class _AlunosTabState extends State<AlunosTab> {
+class _AlunosListaViewState extends State<AlunosListaView> {
   AlunosStore alunosStore = AlunosStore();
   @override
   void initState() {
@@ -31,7 +31,12 @@ class _AlunosTabState extends State<AlunosTab> {
         child: body(),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Colors.orange[700],
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
         onPressed: () {
           EscolaDialogs.cadastrarAluno(context, (String nome) async {
             alunosStore.aluno = AlunoModel(nome: nome);
@@ -54,7 +59,6 @@ class _AlunosTabState extends State<AlunosTab> {
           separatorBuilder: (context, index) =>
               Divider(), // Add a Divider between items
           itemBuilder: (context, index) {
-            final element = alunosStore.alunos![index];
             return buildAluno(alunosStore.alunos![index]);
           },
         );

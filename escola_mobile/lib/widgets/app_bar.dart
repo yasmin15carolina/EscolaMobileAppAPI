@@ -6,7 +6,7 @@ EscolaAppBar() {
     centerTitle: true,
     title: Text(
       "VR Escola",
-      style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold),
+      style: TextStyle(color: Colors.orange[700], fontWeight: FontWeight.bold),
     ),
   );
 }
