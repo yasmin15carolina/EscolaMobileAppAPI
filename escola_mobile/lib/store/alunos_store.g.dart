@@ -85,7 +85,7 @@ mixin _$AlunosStore on _AlunosStoreBase, Store {
       AsyncAction('_AlunosStoreBase.deletarAluno', context: context);
 
   @override
-  Future<dynamic> deletarAluno(int codigo) {
+  Future<bool> deletarAluno(int codigo) {
     return _$deletarAlunoAsyncAction.run(() => super.deletarAluno(codigo));
   }
 

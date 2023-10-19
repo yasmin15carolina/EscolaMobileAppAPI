@@ -99,17 +99,28 @@ class _AlunosListaViewState extends State<AlunosListaView> {
                 icon: Icon(Icons.delete),
                 onPressed: () {
                   EscolaDialogs.deletarAluno(context, () async {
-                    await alunosStore.deletarAluno(aluno.codigo!);
-                    await alunosStore.listarAlunos();
-                    Fluttertoast.showToast(
-                      msg: 'Aluno Deletado!',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
+                    if (await alunosStore.deletarAluno(aluno.codigo!)) {
+                      await alunosStore.listarAlunos();
+                      Fluttertoast.showToast(
+                        msg: 'Aluno Deletado!',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: alunosStore.mensagemErro,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    }
                   });
                 }),
           ),

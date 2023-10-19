@@ -63,16 +63,19 @@ abstract class _AlunosStoreBase with Store {
   }
 
   @action
-  Future deletarAluno(int codigo) async {
+  Future<bool> deletarAluno(int codigo) async {
     try {
       final res = await AlunoService.deletar(codigo);
       if (res.statusCode == 200) {
         print(res.data);
+        return true;
       } else {
         mensagemErro = res.data['error'];
+        return false;
       }
     } catch (e) {
       mensagemErro = "Erro ao Recuperar informações";
+      return false;
     }
   }
 }
