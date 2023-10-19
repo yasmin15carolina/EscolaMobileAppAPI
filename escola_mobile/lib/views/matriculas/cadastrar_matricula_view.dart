@@ -25,9 +25,14 @@ class _CadastrarMatriculaViewState extends State<CadastrarMatriculaView> {
 
   @override
   void initState() {
+    if(Platform.environment.containsKey('FLUTTER_TEST')){
+      alunoStore.alunos= //dados mocados
+     cursosStore.cursos = //dados mocadod
+    }   else{
+      
     alunosStore.listarAlunos();
     cursosStore.listarCursos();
-
+    }
     super.initState();
   }
 
