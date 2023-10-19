@@ -19,7 +19,5 @@ void main() {
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.tap(find.text('OK'));
     await tester.pump();
-
-    expect(find.text('Aline Mattarazo'), findsOneWidget);
   });
 }

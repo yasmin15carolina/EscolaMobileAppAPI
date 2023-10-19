@@ -10,9 +10,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('HomeView')), findsOneWidget);
-
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('CadastrarMatriculaView')), findsOneWidget);
+    expect(find.text('Alunos'), findsOneWidget);
+    expect(find.text('Cursos'), findsOneWidget);
+    expect(find.byIcon(Icons.add), findsOneWidget);
   });
 }

@@ -25,9 +25,7 @@ class _CursosListaViewState extends State<CursosListaView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EscolaAppBar(),
-      body: Container(
-        child: body(),
-      ),
+      body: body(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange[700],
         child: const Icon(

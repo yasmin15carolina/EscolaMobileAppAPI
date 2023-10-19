@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <useS-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="escola_mobile"
+        android:label="VR Escola Mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
